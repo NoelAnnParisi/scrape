@@ -1,0 +1,32 @@
+{
+  "name": "scrape",
+  "version": "1.0.0",
+  "description": "This node.js app scrapes the most popular news headlines and allows users to comment on them",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoelAnnParisi/scrape.git"
+  },
+  "author": "Noel Parisi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NoelAnnParisi/scrape/issues"
+  },
+  "homepage": "https://github.com/NoelAnnParisi/scrape#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.1",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "mongojs": "^2.4.0",
+    "mongoose": "^4.10.4",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7",
+    "request": "^2.81.0",
+    "tachyons": "^4.7.4",
+    "tachyons-flexbox": "^2.0.5"
+  }
+}
