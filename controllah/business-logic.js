@@ -5,6 +5,7 @@ const router = require('express').Router();
 const cheerio = require('cheerio');
 const request = require("request");
 const mongojs = require('mongojs');
+const ScrapedData = require('../mongoDB/mongoose');
 const databaseURL = 'scraping';
 const collections = ['scrapedData'];
 const db = mongojs(databaseURL, collections);
@@ -27,7 +28,8 @@ const scrapeNews = (req, res) => {
       if (title !== '' && link && title.charAt(0) !== "\n") {
         result.push({
           title: title,
-          link: link
+          link: link,
+          comment: "Be the first to comment!"
         });
       }
     });
@@ -35,13 +37,14 @@ const scrapeNews = (req, res) => {
     const handlebars = {
       result: result
     }
-    db.scrapedData.insert(result);
+    const scrapedData = new ScrapedData(result);
+    scrapedData.save(result);
     res.render('index.handlebars', handlebars);
   });
 };
 
 const viewOldNews = (req, res) => {
-  db.scrapedData.find({}, (err, data) => {
+  scrapedData.find({}, (err, data) => {
     if (err) {
       return console.log(err);
     } else {

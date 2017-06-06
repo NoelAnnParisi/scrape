@@ -5,7 +5,7 @@ const path = require('path');
 const port = 3000;
 const app = express();
 const mongoose = require('mongoose');
-const apiRouter = require('./routes/api-routes');
+const routes = require('./routing/routes.js');
 
 app.use(body.urlencoded({
   extended: false
@@ -19,7 +19,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'handlebars');
 app.use(body.json());
 app.use(body.text());
-app.use(apiRouter);
+app.use(routes);
 app.use((req,res,next)=> {
   res.status(404).render('404');
 });

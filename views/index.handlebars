@@ -4,15 +4,19 @@
       <h1 class="f4 bg-near-black white mv0 pv2 ph3">{{this.title}}</h1>
       <div class="pa3 bt">
         <p class="f6 f5-ns lh-copy measure mv0">
-          {{this.link}}
+          <a target ="_blank" href='{{{this.link}}}'>{{this.link}}</a>
         </p>
-          <form action="/" method="POST" class="pa4 black-80">
-            <div>
-              <label for="comment" class="f6 b db mb2">Comments <span class="normal black-60">(optional)</span></label>
-              <textarea id="comment" name="comment" class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc"></textarea>
-              <small id="comment-desc" class="f6 black-60">Please, be factual and kind.</small>
-            </div>
-        </form>
+        <form action="/" method="POST" class="pa4 black-80">
+          <div>
+            <label for="comment" class="f6 b db mb2">Comments <span class="normal black-60">(optional)</span></label>
+            <textarea id="{{this._id}}" name="{{this._id}}" class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc"></textarea>
+            <small id="comment-desc" class="f6 black-60">Please, be factual and kind.</small>
+            <button class="black" type="submit" id="search-button">Submit</button>
+          </div>
+      </form>
+        <p class="f6 f5-ns tc lh-copy measure mv0">
+          {{this.comment}}
+        </p>
       </div>
     </article>
   {{/each}}
