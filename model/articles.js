@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
-  title: String,
-  link: String,
+  title: {type:String, unique: true},
+  link: {type:String, unique: true},
   comment: []
 });
 

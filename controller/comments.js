@@ -8,8 +8,8 @@ const renderComments = (req, res) => {
     const handlebars = {
       result: result
     }
-    console.log(handlebars)
-    res.render('index.handlebars', handlebars);
+    console.log(`handlebars for comment: ${JSON.stringify(handlebars, null, 2)}`)
+    res.render('storedArticles.handlebars', handlebars);
   })
 }
 

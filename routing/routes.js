@@ -3,6 +3,6 @@ const { scrapeNews, viewOldNews } = require('../controller/scrape');
 const { insertComment } = require('../controller/comments');
 
 router.get('/', scrapeNews);
-router.post('/', insertComment);
+router.post('/view', insertComment);
 
 module.exports = router;
