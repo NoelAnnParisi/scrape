@@ -1,19 +1,21 @@
 const Article = require('../model/articles');
 
+// query for all articles
 const renderArticles = (req, res) => {
   Article.find({}, (err, result) => {
     const handlebars = {
       result: result
     }
-    console.log(`handlebars for comment: ${JSON.stringify(handlebars, null, 2)}`)
     res.render('storedArticles.handlebars', handlebars);
   })
 }
 
+// logic when user clicks on 'Archived News'
 const viewAllNews = (req, res) => {
   renderArticles(req, res);
 }
 
+// pushes user's comment to cooresponding news article
 const insertComment = (req, res) => {
   const id = req.body.dbID;
   const where = {_id: id};

@@ -16,6 +16,7 @@ app.use(body.urlencoded({
 }));
 app.use(body.json());
 
+//initialize handlebar helper method
 hndbrs.registerHelper('counter', (index) => {
     return index + 1;
 });
