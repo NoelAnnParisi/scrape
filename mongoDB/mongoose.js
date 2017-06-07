@@ -1,16 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const article = new Schema({
+const ArticleSchema = new Schema({
   title: String,
   link: String,
   comment: [{
-    body: String,
-    date: Date
+    body: String
   }]
-}, {
-  collection: 'scrapedData'
 });
 
-const ScrapedData = mongoose.model('scrapedData', article);
-
-module.exports = ScrapedData;
+module.exports = mongoose.model('article', ArticleSchema);

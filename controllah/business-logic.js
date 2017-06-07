@@ -1,61 +1,37 @@
-// const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/scraping');
-// mongodb://heroku_wxk7rfvz:tu1f9v67t3ljf6p46p7kmjqdaa@ds163681.mlab.com:63681/heroku_wxk7rfvz
 const router = require('express').Router();
+
 const cheerio = require('cheerio');
 const request = require("request");
-const mongojs = require('mongojs');
-const ScrapedData = require('../mongoDB/mongoose');
-const databaseURL = 'scraping';
-const collections = ['scrapedData'];
-const db = mongojs(databaseURL, collections);
 
-db.on('connect', () => {
-  console.log('database connected');
-});
-db.on("error", (error) => {
-  console.log("Database Error:", error);
-});
+const Article = require('../mongoDB/mongoose');
 
 const scrapeNews = (req, res) => {
   request("https://www.nytimes.com/", (error, response, html) => {
     const $ = cheerio.load(html);
-    const result = [];
+    const templateData = [];
     $("h2.story-heading").each(function(i, element) {
+
       const title = $(this).text();
       const link = $(element).children().attr("href");
-      // fix the part where title starts with "/n" --> girl you don't want that!
+
       if (title !== '' && link && title.charAt(0) !== "\n") {
-        result.push({
+        templateData.push({
           title: title,
-          link: link,
-          comment: "Be the first to comment!"
+          link: link
         });
       }
     });
-    console.log(result);
-    const handlebars = {
-      result: result
-    }
-    const scrapedData = new ScrapedData(result);
-    scrapedData.save(result);
-    res.render('index.handlebars', handlebars);
-  });
-};
 
-const viewOldNews = (req, res) => {
-  scrapedData.find({}, (err, data) => {
-    if (err) {
-      return console.log(err);
-    } else {
+    Article.create(templateData, (err, doc) => {
+      if (err) throw new Error(err);
       const handlebars = {
-        data: data
+        result: doc
       }
-      res.render('viewStoredNews.handlebars', handlebars);
-    }
-  });
+      res.render('index.handlebars', handlebars);
+    });
+  })
 }
+
 module.exports = {
-  scrapeNews,
-  viewOldNews
+  scrapeNews
 }

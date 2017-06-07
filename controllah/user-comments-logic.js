@@ -1,20 +1,10 @@
 const router = require('express').Router();
-
-const mongojs = require('mongojs');
-const databaseURL = 'scraping';
-const collections = ['scrapedData'];
-const db = mongojs(databaseURL, collections);
-const ScrapedData = require('../mongoDB/mongoose');
-
-db.on('connect', () => {
-  console.log('database connected');
-});
-db.on("error", (error) => {
-  console.log("Database Error:", error);
-});
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const Article = require('../mongoDB/mongoose');
 
 const renderComments = (req, res) => {
-  scrapedData.find({}, (err, data) => {
+  Article.find({}, (err, data) => {
     const handlebars = {
       data: data
     }
@@ -22,20 +12,21 @@ const renderComments = (req, res) => {
     res.render('index.handlebars', handlebars);
   })
 }
-// fix this part!
+
 const insertComment = (req, res) => {
-  const userComment = req.body;
   console.log(req.body);
-  const comment = {
-    comment: toString(userComment[Object.keys(userComment)])
-  }
-  scrapedData.save(comment), (err, data) => {
-    if (err) {
-      return console.log(err);
-    } else {
-      renderComments(req, res);
+  const id = req.body.dbID;
+  console.log(`YOUR ID ${id}`);
+  console.log(typeof id);
+  const query = {_id: id};
+  // fix how it pushes to the comment array!
+  Article.findByIdAndUpdate(query, {$push:{'comment': {'body': req.body.comment}}}, (err, data) => {
+    if (err){
+      throw new Error(err)
     }
-  }
+    console.log(`this worked!`);
+    console.log(data);
+  })
 }
 
 module.exports = {
