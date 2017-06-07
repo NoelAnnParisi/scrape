@@ -6,9 +6,9 @@
   <h2 class="mt2 mb0 f6 fw4 ttu tracked">Find the most current articles from the NY Times below</h2>
   <nav class="bt bb tc mw7 center mt4">
     <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="/">Most Recent News</a>
-    <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="/archives">Archived News</a>
-    <a class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" target="_blank" href="https://www.nytimes.com/">New York Times</a>
-    <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" target="_blank" href="https://github.com/noelannparisi/scrape">Repo</a>
+    <a class="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" href="/archives">Archived News</a>
+    <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" target="_blank" href="https://www.nytimes.com/">New York Times</a>
+    <a class="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" target="_blank" href="https://github.com/noelannparisi/scrape">Repo</a>
   </nav>
 </header>
 <div class="flex flex-row flex-wrap justify-around">
@@ -21,20 +21,19 @@
         </p>
         <form action="/view" method="POST" class="pa4 black-80">
           <div>
-            <label for="comment" class="f6 b db mb2">Comment here <span class="normal black-60">(optional)</span></label>
+            <label for="comment" class="baskerville f6 b db mb2">Comment here <span class="normal black-60">(optional)</span></label>
             <textarea id="comment" name="comment" class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc"></textarea>
             <input type="hidden" name="dbID" value="{{this._id}}" />
-            <button class="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib black">Submit</button>
+            <small id="comment-desc" class="tc bg-white f6 black-60 baskerville b">Please, be factual and kind.</small>
+            <button class="baskerville fw6 f6 link dim br3 ba bw1 ph3 mt1 pv2 mb2 db black">Submit</button>
           </div>
-          <small id="comment-desc" class="tc bg-white f6 black-60">Please, be factual and kind.</small>
         </form>
         <div class="scrollbox">
-          <h2>{{this.comment.length}} comments below</h2>
+          <h2 class="tc baskerville i underline fw3">{{this.comment.length}} comments below</h2>
           {{#each this.comment}}
-            <div class="list pl0">
-              <div class="pa3 pa4-ns bb b--black-10">
-                <b class="db f3 mb1"></b>
-                <span class="f5 db lh-copy measure">{{counter @index}} : {{this}}</span>
+            <div class="list pl0 ma2">
+              <div class="pa3 pa2-ns bb b--black-10">
+                <span class="baskerville f5 db lh-copy measure">{{counter @index}}) {{this}}</span>
               </div>
             </div>
           {{/each}}

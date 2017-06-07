@@ -1,8 +1,6 @@
 const router = require('express').Router();
-const { scrapeNews, viewOldNews } = require('../controller/scrape');
-const { insertComment } = require('../controller/comments');
-const { viewAllNews } = require('../controller/archives');
-
+const { scrapeNews } = require('../controller/scrape');
+const { insertComment, viewAllNews } = require('../controller/comments');
 
 router.get('/', scrapeNews);
 router.get('/archives', viewAllNews);
