@@ -21,6 +21,8 @@
     "cheerio": "^1.0.0-rc.1",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.10",
+    "handlebars-helpers": "^0.8.2",
     "mongojs": "^2.4.0",
     "mongoose": "^4.10.4",
     "nodemon": "^1.11.0",

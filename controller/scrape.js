@@ -1,5 +1,3 @@
-const router = require('express').Router();
-
 const cheerio = require('cheerio');
 const request = require("request");
 

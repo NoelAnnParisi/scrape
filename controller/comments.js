@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// const router = require('express').Router();
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
 const Article = require('../model/articles');
 
 const renderComments = (req, res) => {
