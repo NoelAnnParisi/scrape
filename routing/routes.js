@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { scrapeNews, viewOldNews } = require('../controllah/business-logic');
-const { insertComment } = require('../controllah/user-comments-logic');
+const { scrapeNews, viewOldNews } = require('../controller/scrape');
+const { insertComment } = require('../controller/comments');
 
 router.get('/', scrapeNews);
 router.post('/', insertComment);

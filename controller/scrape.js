@@ -3,7 +3,7 @@ const router = require('express').Router();
 const cheerio = require('cheerio');
 const request = require("request");
 
-const Article = require('../mongoDB/mongoose');
+const Article = require('../model/articles');
 
 const scrapeNews = (req, res) => {
   request("https://www.nytimes.com/", (error, response, html) => {
