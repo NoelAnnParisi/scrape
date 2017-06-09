@@ -22,9 +22,14 @@ const insertComment = (req, res) => {
   const where = {_id: id};
   const query = Article.findByIdAndUpdate(where,
     {$push:{'comment': req.body.comment}});
-  // once promise resolves then render articles
+  // once promise resolves then render most recent articles
   query.then(()=> {
-    renderArticles(req, res)
+    Article.find({}).sort({'created_at': 1}).limit(9).exec((err, result) => {
+      const handlebars = {
+        result: result
+      }
+      res.render('storedArticles', handlebars);
+    })
   });
 }
 

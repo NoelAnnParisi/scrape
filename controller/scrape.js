@@ -22,12 +22,15 @@ const scrapeNews = (req, res) => {
         });
       }
     });
+    // console.log("scrape block: ", typeof templateData);
+    // const view = [];
+
     // using scraped data, create an instance of Mongoose schema
     Article.create(templateData, (err, doc) => {
       if (err) {
-        // if title/link already exsists query and display from DB
+        // if title/link already exsists query today's news from the database
         if (err.name === 'MongoError' && err.code === 11000) {
-          Article.find({}, (err, result) => {
+          Article.find({}).sort({'created_at': 1}).limit(9).exec((err, result) => {
             const handlebars = {
               result: result
             }
@@ -36,15 +39,19 @@ const scrapeNews = (req, res) => {
         }
       // else create instance & render results
       } else {
-        const handlebars = {
-          result: doc
-        }
-        res.render('index.handlebars', handlebars);
-      }
+        Article.create(templateData, (err, doc) => {
+          Article.find({}, (err, result) => {
+            console.log(`${JSON.stringify(result, null,2)}`);
+            const handlebars = {
+              result: result
+            }
+            res.render('index.handlebars', handlebars);
+          })
+        });
+      };
     });
-  })
+  });
 }
-
 module.exports = {
   scrapeNews
 }
