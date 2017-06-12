@@ -15,7 +15,8 @@ const scrapeNews = (req, res) => {
       const link = $(element).children().attr("href");
       // if it's a valid title & link push to array
       if (title !== '' && link && title.charAt(0) !== "\n" && title !==
-        "Mortgage Calculator" && title !== "Search for Homes for Sale or Rent") {
+        "Mortgage Calculator" && title !== "Search for Homes for Sale or Rent" &&
+        !title.includes("Morning Briefing")) {
         templateData.push({
           title: title,
           link: link
@@ -28,6 +29,7 @@ const scrapeNews = (req, res) => {
     // using scraped data, create an instance of Mongoose schema
     Article.create(templateData, (err, doc) => {
       if (err) {
+        console.log(err);
         // if title/link already exsists query today's news from the database
         if (err.name === 'MongoError' && err.code === 11000) {
           Article.find({}).sort({'created_at': 1}).limit(9).exec((err, result) => {
@@ -39,6 +41,7 @@ const scrapeNews = (req, res) => {
         }
       // else create instance & render results
       } else {
+        console.log('else is running');
         Article.create(templateData, (err, doc) => {
           Article.find({}, (err, result) => {
             console.log(`${JSON.stringify(result, null,2)}`);
