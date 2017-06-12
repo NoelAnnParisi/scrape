@@ -16,7 +16,8 @@ const scrapeNews = (req, res) => {
       // if it's a valid title & link push to array
       if (title !== '' && link && title.charAt(0) !== "\n" && title !==
         "Mortgage Calculator" && title !== "Search for Homes for Sale or Rent" &&
-        !title.includes("Morning Briefing") && title !== "What to Cook This Week") {
+        !title.includes("Morning Briefing") && title !== "What to Cook This Week"
+        && !title.includes("Homes That Sold for Around")) {
         templateData.push({
           title: title,
           link: link
