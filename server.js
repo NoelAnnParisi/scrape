@@ -9,7 +9,7 @@ const app = express();
 const mongoose = require('mongoose');
 const routes = require('./routing/routes.js');
 // for development
-// mongoose.connect('mongodb://localhost/scraping');
+//mongoose.connect('mongodb://localhost/scraping');
 // for production:
 mongoose.connect('mongodb://heroku_wxk7rfvz:tu1f9v67t3ljf6p46p7kmjqdaa@ds163681.mlab.com:63681/heroku_wxk7rfvz');
 app.use(body.urlencoded({
@@ -36,5 +36,5 @@ app.use((req,res,next)=> {
   res.status(404).render('404');
 });
 app.listen(port, () => {
-  console.log("App running on port 3000!");
+  console.log("App running on port 8080!");
 });

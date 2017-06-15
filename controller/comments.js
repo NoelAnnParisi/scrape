@@ -24,7 +24,7 @@ const insertComment = (req, res) => {
     {$push:{'comment': req.body.comment}});
   // once promise resolves then render most recent articles
   query.then(()=> {
-    Article.find({}).sort({'created_at': 1}).limit(9).exec((err, result) => {
+    Article.find({}).sort({'created_at': -1}).limit(9).exec((err, result) => {
       const handlebars = {
         result: result
       }

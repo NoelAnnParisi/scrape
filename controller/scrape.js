@@ -33,7 +33,7 @@ const scrapeNews = (req, res) => {
         console.log(err);
         // if title/link already exsists query today's news from the database
         if (err.name === 'MongoError' && err.code === 11000) {
-          Article.find({}).sort({'created_at': 1}).limit(9).exec((err, result) => {
+          Article.find({}).sort({'created_at': -1}).limit(9).exec((err, result) => {
             const handlebars = {
               result: result
             }
